@@ -39,11 +39,6 @@ public class PitbossRoutes extends RouteBuilder {
 		from(configuration.responseQueue())
 				.routeId("hrm.casino.pitboss.responses")
 				.bean(this, "onResponse");
-
-		// unmarshall to events endpoint
-		from("direct:pitboss_events")
-				.routeId("hrm.casino.pitboss.events")
-				.to(configuration.eventsEndpoint());
 	}
 
 	@Reference
@@ -54,7 +49,7 @@ public class PitbossRoutes extends RouteBuilder {
 	@Activate
 	void activate(Map<String, Object> cfg) {
 		this.configuration = Configurable.createConfigurable(Config.class, cfg);
-		pitboss = new Pitboss(producerTemplate, configuration.requestQueue(), "direct:pitboss_events");
+		pitboss = new Pitboss(producerTemplate, configuration.requestQueue(), configuration.eventsEndpoint());
 	}
 
 	@Override
