@@ -29,4 +29,13 @@ public class Game implements Serializable {
 	public void setGameId(String gameId) {
 		this.gameId = gameId;
 	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("Game{");
+		sb.append("gameId='").append(gameId).append('\'');
+		sb.append(", range=").append(range);
+		sb.append('}');
+		return sb.toString();
+	}
 }

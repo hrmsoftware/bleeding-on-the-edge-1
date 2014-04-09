@@ -33,4 +33,12 @@ public class GuessRequest implements Serializable {
 		return new GuessResponse(this, player, guess);
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("GuessRequest{");
+		sb.append("game=").append(game);
+		sb.append(", requestId='").append(requestId).append('\'');
+		sb.append('}');
+		return sb.toString();
+	}
 }

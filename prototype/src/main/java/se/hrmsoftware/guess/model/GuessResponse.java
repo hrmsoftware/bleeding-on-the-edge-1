@@ -40,4 +40,13 @@ public class GuessResponse implements Serializable {
 		this.request = request;
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("GuessResponse{");
+		sb.append("request=").append(request);
+		sb.append(", player='").append(player).append('\'');
+		sb.append(", guess=").append(guess);
+		sb.append('}');
+		return sb.toString();
+	}
 }

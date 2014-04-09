@@ -19,4 +19,12 @@ public class GameStartedEvent implements Serializable {
 	public void setGameId(String gameId) {
 		this.gameId = gameId;
 	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("GameStartedEvent{");
+		sb.append("gameId='").append(gameId).append('\'');
+		sb.append('}');
+		return sb.toString();
+	}
 }

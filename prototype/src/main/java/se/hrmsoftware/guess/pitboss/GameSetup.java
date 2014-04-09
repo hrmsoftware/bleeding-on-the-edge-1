@@ -1,6 +1,7 @@
 package se.hrmsoftware.guess.pitboss;
 
 import se.hrmsoftware.guess.model.Game;
+import se.hrmsoftware.guess.model.GuessRequest;
 
 public class GameSetup {
 	private final Game game;

@@ -14,6 +14,15 @@ public class GuessMadeEvent implements Serializable {
 		this.gameId = gameId;
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("GuessMadeEvent{");
+		sb.append("player='").append(player).append('\'');
+		sb.append(", gameId='").append(gameId).append('\'');
+		sb.append('}');
+		return sb.toString();
+	}
+
 	public String getPlayer() {
 		return player;
 	}

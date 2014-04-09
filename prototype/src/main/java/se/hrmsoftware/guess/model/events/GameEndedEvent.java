@@ -29,4 +29,13 @@ public class GameEndedEvent implements Serializable {
 	public void setWinner(String winner) {
 		this.winner = winner;
 	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("GameEndedEvent{");
+		sb.append("gameId='").append(gameId).append('\'');
+		sb.append(", winner='").append(winner).append('\'');
+		sb.append('}');
+		return sb.toString();
+	}
 }
