@@ -12,7 +12,6 @@
         <module>pitboss</module>
         <module>file-leaderboard</module>
         <module>game-creator</module>
-        <module>player</module>
     </modules>
     <packaging>pom</packaging>
 
