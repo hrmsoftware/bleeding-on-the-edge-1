@@ -10,6 +10,7 @@
     <modules>
         <module>model</module>
         <module>pitboss</module>
+        <module>file-leaderboard</module>
     </modules>
     <packaging>pom</packaging>
 
