@@ -24,7 +24,7 @@ import java.util.Set;
  * Listens for events on the event-notification channel, and
  * creates new games according to the configuration.
  */
-@Component(configurationPolicy = ConfigurationPolicy.require, designate = GameManagerRoute.Config.class, provide = {RouteBuilder.class})
+@Component(configurationPolicy = ConfigurationPolicy.require, enabled = false, designate = GameManagerRoute.Config.class, provide = {RouteBuilder.class})
 public class GameManagerRoute extends RouteBuilder {
 
 	private final Set<String> startedGames = Collections.synchronizedSet(new HashSet<String>());
