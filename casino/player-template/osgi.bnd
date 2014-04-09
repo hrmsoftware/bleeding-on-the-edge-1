@@ -1,0 +1,7 @@
+# This file contains instructions to BND
+
+# To add a Bundle-Activator:
+# Bundle-Activator: [classname]
+
+# To scan for BND annotations:
+# Service-Component: *
