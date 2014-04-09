@@ -54,7 +54,9 @@ public class GameManagerRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from(configuration.eventsEndpoint()).bean(this);
+		from(configuration.eventsEndpoint())
+				.routeId("hrm.casino.gamecreator")
+				.bean(this);
 	}
 
 	@Handler
