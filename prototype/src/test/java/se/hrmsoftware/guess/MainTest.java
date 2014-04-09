@@ -12,6 +12,7 @@ import org.junit.Test;
 import se.hrmsoftware.guess.model.GuessRequest;
 import se.hrmsoftware.guess.model.GuessResponse;
 import se.hrmsoftware.guess.model.Range;
+import se.hrmsoftware.guess.model.events.GameEndedEvent;
 import se.hrmsoftware.guess.pitboss.Pitboss;
 
 import java.util.HashMap;
@@ -28,7 +29,7 @@ public class MainTest extends CamelTestSupport {
 			put("range.upper", "200");
 		}});
 
-		Thread.sleep(5000L);
+		Thread.sleep(15000L);
 
 	}
 
@@ -83,10 +84,20 @@ public class MainTest extends CamelTestSupport {
 	}
 
 	public class MonitorRoutes extends RouteBuilder {
+
 		@Override
 		public void configure() throws Exception {
 			// Simply log events from the notification stream
-			from("seda:notify_topic").log(LoggingLevel.INFO, "Event: ${body}");
+			from("seda:notify_topic").log(LoggingLevel.INFO, "Event: ${body}")
+					.filter(body().isInstanceOf(GameEndedEvent.class))
+					.setHeader("range.lower", constant("10")).setHeader("range.upper", constant("100"))
+					.log(LoggingLevel.INFO, "Game Finished - Launching another game!")
+					.to("direct:new_games");
+		}
+
+		@Override
+		public String toString() {
+			return "monitor";
 		}
 	}
 
@@ -103,9 +114,6 @@ public class MainTest extends CamelTestSupport {
 			Range range = request.getGame().getRange();
 			int guess = -1;
 			int diff = range.getUpperBound() - range.getLowerBound();
-			if (diff == 0) {
-				guess = range.getLowerBound();
-			}
 			if (diff == 1) {
 				if (new Random(System.currentTimeMillis()).nextBoolean()) {
 					guess = range.getUpperBound();
@@ -116,7 +124,6 @@ public class MainTest extends CamelTestSupport {
 				int half = diff / 2;
 				guess = range.getLowerBound() + half;
 			}
-			System.out.println(name + " guessing on " + range + " -> " + guess);
 			return request.createResponse(name, guess);
 		}
 
@@ -125,6 +132,8 @@ public class MainTest extends CamelTestSupport {
 			// Take from request-queue - make a guess - put on response-queue.
 			from("seda:request_queue?multipleConsumers=true")
 					.bean(this)
+					.delay(500L)
+					.log(LoggingLevel.INFO, "Making a guess: ${body}")
 					.to("seda:response_queue");
 		}
 

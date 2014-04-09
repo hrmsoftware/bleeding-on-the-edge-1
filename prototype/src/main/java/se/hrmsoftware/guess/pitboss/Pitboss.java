@@ -64,7 +64,7 @@ public class Pitboss implements GameDriver.Callback {
 		if (driver != null) {
 			driver.onResponse(response);
 		} else {
-			LOG.warn("Dropping event from unknown game: {}", response);
+			LOG.debug("Dropping event from unknown game: {}", response);
 		}
 	}
 

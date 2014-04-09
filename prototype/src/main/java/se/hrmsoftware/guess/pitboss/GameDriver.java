@@ -46,17 +46,17 @@ public class GameDriver {
 
 	public void onResponse(GuessResponse response) {
 		if (!response.getRequest().getGame().getGameId().equals(gameSetup.getGame().getGameId())) {
-			LOG.warn("Received response for unknown game (!). My game: {}, That game: {}",
+			LOG.debug("Received response for unknown game (!). My game: {}, That game: {}",
 					gameSetup.getGame().getGameId(),
 					response.getRequest().getGame().getGameId());
 		} else {
 			GuessRequest request = outstandingRequests.remove(response.getRequest().getRequestId());
 			if (request == null) {
-				LOG.warn("Dropping unexpected response: {}", response);
+				LOG.debug("Dropping unexpected response: {}", response);
 			} else {
 				callback.onGuess(gameSetup.getGame().getGameId(), response.getPlayer());
 				if (gameSetup.getCorrectGuess() == response.getGuess()) {
-					LOG.info("{} We have a winner: {}", gameSetup.getGame().getGameId(), response.getPlayer());
+					LOG.info("We have a winner: {}", response);
 					callback.onCorrectGuess(gameSetup.getGame().getGameId(),
 							response.getPlayer());
 				}
