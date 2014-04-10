@@ -17,24 +17,24 @@ import java.util.Map;
 public class SnapshotAggregatorRouteTest extends CamelTestSupport {
     private static final String FIRST_MESSAGE =
             "+------------------------------------+\n" +
-                    "| Current: 1                         |\n" +
-                    "| Games played: 0                    |\n" +
-                    "+------------------------------------+\n" +
-                    "| Player    | Wins      | Guesses    |\n" +
-                    "+------------------------------------+\n" +
-                    "+------------------------------------+\n";
+            "| Current: 1                         |\n" +
+            "| Games played: 0                    |\n" +
+            "+------------------------------------+\n" +
+            "| Player    | Wins      | Guesses    |\n" +
+            "+------------------------------------+\n" +
+            "+------------------------------------+\n";
 
     private static final String SECOND_MESSAGE =
             "+------------------------------------+\n" +
-                    "| Current: 0                         |\n" +
-                    "| Games played: 1                    |\n" +
-                    "+------------------------------------+\n" +
-                    "| Player    | Wins      | Guesses    |\n" +
-                    "+------------------------------------+\n" +
-                    "| p2        | 1         | 1          |\n" +
-                    "| p1        | 0         | 2          |\n" +
-                    "| p3        | 0         | 1          |\n" +
-                    "+------------------------------------+\n";
+            "| Current: 0                         |\n" +
+            "| Games played: 1                    |\n" +
+            "+------------------------------------+\n" +
+            "| Player    | Wins      | Guesses    |\n" +
+            "+------------------------------------+\n" +
+            "| p2        | 1         | 1          |\n" +
+            "| p1        | 0         | 2          |\n" +
+            "| p3        | 0         | 1          |\n" +
+            "+------------------------------------+\n";
 
     private SnapshotAggregatorRoute route;
 
