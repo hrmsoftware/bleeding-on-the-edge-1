@@ -7,7 +7,6 @@ import aQute.bnd.annotation.metatype.Configurable;
 import aQute.bnd.annotation.metatype.Meta;
 import org.apache.camel.builder.RouteBuilder;
 
-import java.io.File;
 import java.util.Map;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -37,15 +36,15 @@ public class SnapshotAggregatorRoute extends RouteBuilder {
 				.bean(snapshotBuilder)
 				.bean(SnapshotFormatter.class)
                 .sample(1, SECONDS)
-				.to(configuration.outputDirectory() + "?fileName=leaderboard.txt");
+				.to(configuration.outputEndpoint());
 	}
 
 	@Meta.OCD(name = "Leaderboard Route configuration")
 	public interface Config {
 		@Meta.AD(name = "Events endpoint", description = "Camel endpoint from where to read events")
 		String eventsEndpoint();
-		@Meta.AD(name = "Output directory", description = "Directory where the updated leaderboard will be written")
-		File outputDirectory();
+		@Meta.AD(name = "Output endpoint", description = "Camel endpoint where the updated leaderboard will be written")
+		String outputEndpoint();
 	}
 
 }
