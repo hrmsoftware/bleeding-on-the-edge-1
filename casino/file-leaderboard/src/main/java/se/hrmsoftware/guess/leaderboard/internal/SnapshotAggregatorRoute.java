@@ -5,11 +5,12 @@ import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.ConfigurationPolicy;
 import aQute.bnd.annotation.metatype.Configurable;
 import aQute.bnd.annotation.metatype.Meta;
-import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 
 import java.io.File;
 import java.util.Map;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * Reads events from the configured event-stream, updates a Leaderboard instance
@@ -33,15 +34,10 @@ public class SnapshotAggregatorRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		from(configuration.eventsEndpoint())
-				.routeId("hrm.casino.leaderboard")
-				.log(LoggingLevel.INFO, "EVENT: ${body}");
-		/*
-		from(configuration.eventsEndpoint())
 				.bean(snapshotBuilder)
 				.bean(SnapshotFormatter.class)
-				// TODO: Find a way to pass through only each nTh message - or a message event nTh second.
+                .sample(1, SECONDS)
 				.to(configuration.outputDirectory() + "?fileName=leaderboard.txt");
-				*/
 	}
 
 	@Meta.OCD(name = "Leaderboard Route configuration")
